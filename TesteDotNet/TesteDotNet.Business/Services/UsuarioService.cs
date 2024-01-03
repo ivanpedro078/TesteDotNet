@@ -16,6 +16,7 @@ namespace TesteDotNet.Business.Services
         public List<UsuarioDTO>? BuscarUsuarios()
         {
             List<Usuarios>? usuarios = _usuarioContext.Usuarios.ToList();
+            if (!usuarios.Any()) throw new Exception("Não foram encontrados usuários");
             List<UsuarioDTO>? usuariosDTO = new();
 
             foreach (var usuario in usuarios)
@@ -25,7 +26,13 @@ namespace TesteDotNet.Business.Services
             }
             return usuariosDTO;
         }
-       
+       public UsuarioDTO? BuscarUsuarioPorCpf(string cpf)
+        {
+            Usuarios? usuario = _usuarioContext.Usuarios.Where(e => e.cpf == cpf).FirstOrDefault();
+            if (usuario == null) throw new Exception("Usuário não encontrado.");
+            UsuarioDTO? usuarioDTO = new(usuario);
+            return usuarioDTO;
+        }
     }
 
 }

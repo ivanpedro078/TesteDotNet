@@ -32,7 +32,21 @@ namespace TesteDotNet.Web.Controllers
             {
                 error = e.Message;  
             }
-            return Json(new {usuarios, is_action});
+            return Json(new {usuarios, is_action, error});
+        }
+        public ActionResult BuscarUsuarioPorCpf(string cpf) 
+        {
+            bool is_action = false;
+            string error = string.Empty;
+            try
+            {
+                is_action = true;
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+            }
+            return Json(new {is_action, error});
         }
     }
 }
