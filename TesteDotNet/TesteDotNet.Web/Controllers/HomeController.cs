@@ -1,32 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TesteDotNet.Web.Models;
+using TesteDotNet.Business.DTOs;
+using TesteDotNet.Business.Services;
+using TesteDotNet.Repository.Entities;
 
 namespace TesteDotNet.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly UsuarioService _usuarioService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UsuarioService usuarioService)
         {
-            _logger = logger;
+            _usuarioService = usuarioService;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public ActionResult BuscarUsuarios(string cpf)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            List<UsuarioDTO>?  usuarios = new();
+            bool is_action = false;
+            string error = string.Empty;
+            try
+            { 
+               usuarios = _usuarioService.BuscarUsuarios();
+                is_action = true;
+            }
+            catch (Exception e)
+            {
+                error = e.Message;  
+            }
+            return Json(new {usuarios, is_action});
         }
     }
 }

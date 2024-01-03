@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TesteDotNet.Business\TesteDotNet.Business.csproj" />
     <ProjectReference Include="..\TesteDotNet.Repository\TesteDotNet.Repository.csproj" />
   </ItemGroup>
 

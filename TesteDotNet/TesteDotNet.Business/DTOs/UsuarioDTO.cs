@@ -23,5 +23,10 @@ namespace TesteDotNet.Business.DTOs
             celular = usuarios.celular;
             isWhatsApp = usuarios.isWhatsApp;
         }
+
+        internal void Add(UsuarioDTO usuarioDTO)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
