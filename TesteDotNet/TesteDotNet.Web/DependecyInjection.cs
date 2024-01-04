@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using TesteDotNet.Business.Services;
 using TesteDotNet.Repository.Context;
 
 namespace TesteDotNet.Web
@@ -10,6 +11,8 @@ namespace TesteDotNet.Web
         {
             builder.Services.AddDbContext<UsuarioContext>(options =>
              options.UseSqlServer(builder.Configuration.GetConnectionString("UsuariosConnectionString")));
+
+            builder.Services.AddScoped<UsuarioService>();
 
             return builder;
         }
